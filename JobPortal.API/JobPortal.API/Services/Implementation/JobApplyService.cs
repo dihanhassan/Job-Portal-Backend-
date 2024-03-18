@@ -1,10 +1,10 @@
-﻿using JobPortal.API.Models;
-using JobPortal.API.Models.Log;
+﻿using JobPortal.API.Models.Log;
 using JobPortal.API.Models.Response;
 using JobPortal.API.Repositorie.Interface;
 using JobPortal.API.Services.Interface;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Text.Json;
+using JobPortal.API.Models.Job;
 
 namespace JobPortal.API.Services.Implementation
 {

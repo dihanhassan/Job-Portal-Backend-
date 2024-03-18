@@ -1,4 +1,4 @@
-﻿using JobPortal.API.Models;
+﻿using JobPortal.API.Models.Job;
 using JobPortal.API.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

@@ -1,4 +1,4 @@
-﻿using JobPortal.API.Models;
+﻿using JobPortal.API.Models.Job;
 using JobPortal.API.Models.Response;
 
 namespace JobPortal.API.Services.Interface

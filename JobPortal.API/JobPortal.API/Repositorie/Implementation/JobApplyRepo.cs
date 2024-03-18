@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using JobPortal.API.Models;
 using JobPortal.API.Models.Data;
+using JobPortal.API.Models.Job;
 using JobPortal.API.Repositorie.Interface;
 
 namespace JobPortal.API.Repositorie.Implementation

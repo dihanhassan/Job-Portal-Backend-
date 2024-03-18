@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using JobPortal.API.Models;
 using JobPortal.API.Models.Data;
+using JobPortal.API.Models.Job;
 using JobPortal.API.Repositorie.Interface;
 using System.Data.Common;
 using System.Reflection;

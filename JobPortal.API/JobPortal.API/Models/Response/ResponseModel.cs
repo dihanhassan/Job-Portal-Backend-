@@ -1,4 +1,5 @@
 ﻿using JobPortal.API.Models.Authentication;
+using JobPortal.API.Models.Job;
 
 namespace JobPortal.API.Models.Response
 {
