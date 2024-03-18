@@ -65,6 +65,8 @@ namespace JobPortal.API.Services.Implementation
                 List<JobPostModel> post = await _repo.GetJobPosts();
                 if (post.Count > 0)
                 {
+
+
                     response.GetJobPosts = post;
 
                     response.StatusMessage = "post get successfully!";
@@ -120,7 +122,7 @@ namespace JobPortal.API.Services.Implementation
 
         }
 
-        public async Task<ResponseModel> DeletePost(int PostID)
+        public async Task<ResponseModel> DeletePost(int PostID,string UserID)
         {
             try
             {
@@ -128,7 +130,16 @@ namespace JobPortal.API.Services.Implementation
                 
                 if (await _repo.DeletePost(PostID) > 0)
                 {
-                    
+                    CustomLog log = new CustomLog
+                    {
+                        UserID = UserID,
+                        ActionTime = DateTime.UtcNow,
+                        ActionType = "Delete",
+                        ActionField = "Delete Post",
+                        jsonPayload = JsonSerializer.Serialize(UserID)
+                    };
+                    await _logRepo.CreateLog(log);
+
                     response.StatusMessage = "Post deleted successfully!";
                     response.StatusCode = 200;
 

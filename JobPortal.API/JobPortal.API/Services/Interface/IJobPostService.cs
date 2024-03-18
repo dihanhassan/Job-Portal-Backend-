@@ -8,6 +8,6 @@ namespace JobPortal.API.Services.Interface
         public Task<ResponseModel> AddJobPost(JobPostModel jobPost);
         public Task<ResponseModel> GetJobPosts();
         public Task<ResponseModel> GetJobPostsByUserID(string UserID);
-        public Task<ResponseModel> DeletePost (int  PostID);    
+        public Task<ResponseModel> DeletePost (int  PostID,string userID);    
     }
 }

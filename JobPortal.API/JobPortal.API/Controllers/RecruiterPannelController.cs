@@ -36,10 +36,10 @@ namespace JobPortal.API.Controllers
 
         [HttpPut]
         [Route("DeletePost")]
-        public async Task<IActionResult> DeletePost(int PostID)
+        public async Task<IActionResult> DeletePost(int PostID,string UserID)
         {
             IActionResult response = Unauthorized();
-            return Ok(await _jobPostService.DeletePost(PostID));
+            return Ok(await _jobPostService.DeletePost(PostID,UserID));
 
         }
         [HttpGet]
