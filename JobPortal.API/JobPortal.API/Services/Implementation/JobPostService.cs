@@ -32,7 +32,7 @@ namespace JobPortal.API.Services.Implementation
                     response.StatusMessage = "Add Post Successfully.";
                     response.StatusCode = 200;
 
-                    CustomLog log = new CustomLog
+                    CustomLogModel log = new CustomLogModel
                     {
                         UserID = jobPost.UserID,
                         ActionTime = DateTime.UtcNow,
@@ -130,7 +130,7 @@ namespace JobPortal.API.Services.Implementation
                 
                 if (await _repo.DeletePost(PostID) > 0)
                 {
-                    CustomLog log = new CustomLog
+                    CustomLogModel log = new CustomLogModel
                     {
                         UserID = UserID,
                         ActionTime = DateTime.UtcNow,

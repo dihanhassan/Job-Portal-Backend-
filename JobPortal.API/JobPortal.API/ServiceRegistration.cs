@@ -27,6 +27,7 @@ namespace JobPortal.API
             Services.AddTransient<IViewApplicantRepo, ViewApplicantRepo>();
             Services.AddTransient<IViewApplicantService, ViewApplicantService>();
             Services.AddTransient<ILogRepo,LogRepo >();
+            Services.AddTransient<ILogService, LogService>();
 
 
         }

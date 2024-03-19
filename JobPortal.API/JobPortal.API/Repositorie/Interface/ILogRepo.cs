@@ -5,7 +5,7 @@ namespace JobPortal.API.Repositorie.Interface
 {
     public interface ILogRepo
     {
-        public Task<int> CreateLog(CustomLog log);
-        
+        public Task<int> CreateLog(CustomLogModel log);
+        public Task<List<CustomLogModel>> GetAllLogs();
     }
 }

@@ -27,7 +27,7 @@ namespace JobPortal.API.Services.Implementation
                 response.StatusMessage = "Apply Successfully";
                 response.StatusCode = 200;
 
-                CustomLog log = new CustomLog
+                CustomLogModel log = new CustomLogModel
                 {
                     UserID = jobApply.EmployeeID.ToString(),
                     ActionTime = DateTime.UtcNow,

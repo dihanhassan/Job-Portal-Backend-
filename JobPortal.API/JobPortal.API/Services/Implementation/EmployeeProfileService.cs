@@ -35,7 +35,7 @@ namespace JobPortal.API.Services.Implementation
             if (RowsCount > 0)
             {
 
-                CustomLog log = new CustomLog {
+                CustomLogModel log = new CustomLogModel {
                     UserID = profile.UserID,
                     ActionTime = DateTime.UtcNow,
                     ActionType = "Insert",
@@ -69,7 +69,7 @@ namespace JobPortal.API.Services.Implementation
 
             if (RowsCount > 0)
             {
-                CustomLog log = new CustomLog
+                CustomLogModel log = new CustomLogModel
                 {
                     UserID = profile.UserID,
                     ActionTime = DateTime.UtcNow,

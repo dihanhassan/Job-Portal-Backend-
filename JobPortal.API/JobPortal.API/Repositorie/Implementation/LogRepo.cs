@@ -14,7 +14,7 @@ namespace JobPortal.API.Repositorie.Implementation
         {
             _dbConnection = dbConnection;  
         }
-        public async Task<int> CreateLog(CustomLog log)
+        public async Task<int> CreateLog(CustomLogModel log)
         {
             try
             {
@@ -37,7 +37,39 @@ namespace JobPortal.API.Repositorie.Implementation
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<List<CustomLogModel>> GetAllLogs()
+        {
+            try
+            {
 
-       
+                using (var connection = _dbConnection.CreateConnection())
+                {
+                    string query = @"SELECT  
+                                     [LogId]
+                                    ,[UserID]
+                                    ,[ActionTime]
+                                    ,[ActionType]
+                                    ,[ActionField]
+                                    ,[jsonPayload]
+                                FROM [JOBPORTALBD].[dbo].[ACTIVITY_LOG]";
+
+
+
+                    var logs = await connection.QueryAsync<CustomLogModel>(query);
+             
+                    return logs.ToList();
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+
     }
 }
