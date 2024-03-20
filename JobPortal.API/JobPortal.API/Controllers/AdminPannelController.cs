@@ -20,5 +20,7 @@ namespace JobPortal.API.Controllers
         {
             return Ok(await _logService.GetAllLogs());
         }
+
+       
     }
 }

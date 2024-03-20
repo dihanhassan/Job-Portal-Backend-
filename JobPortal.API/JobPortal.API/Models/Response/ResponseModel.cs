@@ -7,11 +7,15 @@ namespace JobPortal.API.Models.Response
     {
         public int StatusCode { get; set; }
         public string StatusMessage { get; set; } = string.Empty;
-        
-        public UserLoginModel UserLogin { get; set; }
 
-        public List<JobPostModel> GetJobPosts { get; set; }
-        public List<ApplicantInfoModel> GetApplicantInfo { get; set; }
+        public dynamic? Data { get; set; }
+        
+       /* public UserLoginModel? UserLogin { get; set; }
+
+        public List<JobPostModel>? GetJobPosts { get; set; }
+        public List<ApplicantInfoModel>? GetApplicantInfo { get; set; }*/
+
+     
 
     }
 }

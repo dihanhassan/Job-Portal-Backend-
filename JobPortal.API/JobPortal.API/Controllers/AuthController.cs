@@ -53,6 +53,8 @@ namespace JobPortal.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Registration(UserRegistrationModel user)
         {
+
+
             return  Ok( await _registrationService.RegisterUser(user));
        
         }

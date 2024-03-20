@@ -67,7 +67,7 @@ namespace JobPortal.API.Services.Implementation
                 {
 
 
-                    response.GetJobPosts = post;
+                    response.Data = post;
 
                     response.StatusMessage = "post get successfully!";
                     response.StatusCode = 200;
@@ -99,7 +99,7 @@ namespace JobPortal.API.Services.Implementation
                 List<JobPostModel> post = await _repo.GetJobPostsByUserID(UserID);
                 if (post.Count > 0)
                 {
-                    response.GetJobPosts = post;
+                    response.Data = post;
 
                     response.StatusMessage = "post get successfully!";
                     response.StatusCode = 200;

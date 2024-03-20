@@ -18,8 +18,11 @@ namespace JobPortal.API.Services.Implementation
             ResponseModel response = new ResponseModel();
             if(RowsCount > 0)
             {
+                user.UserPassword = "";
                 response.StatusMessage = $"Login Success . Hello Mr. {user.UserName} ";
                 response.StatusCode = 200;
+                response.Data = user;
+                
                 return response;
             }
             else 

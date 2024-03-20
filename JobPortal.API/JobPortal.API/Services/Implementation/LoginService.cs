@@ -27,7 +27,7 @@ namespace JobPortal.API.Services.Implementation
 
             UserLoginModel credential = await _repo.GetUserLoginInfo(user.UserName, user.UserPassword);
 
-            if (credential != null && credential.UserName== user.UserName && credential.UserPassword == user.UserPassword)
+            if (credential != null && (credential.UserName== user.UserName || credential.Email==user.UserName) && credential.UserPassword == user.UserPassword)
             {
                 
                 user.UserID = credential.UserID;
@@ -36,7 +36,7 @@ namespace JobPortal.API.Services.Implementation
                 credential.RefreshToken = token.RefreshToken;
                
                 credential.UserPassword = null;
-                response.UserLogin = credential;
+                response.Data = credential;
                 response.StatusMessage = $"Login Success . Hello Mr. {user.UserName} ";
                 response.StatusCode = 200 ;
                 
@@ -48,7 +48,7 @@ namespace JobPortal.API.Services.Implementation
             {
                 response.StatusMessage = $"Login Faield .";
                 response.StatusCode = 100;
-                response.UserLogin = credential;
+                response.Data = credential;
                 return response;
             }
         }

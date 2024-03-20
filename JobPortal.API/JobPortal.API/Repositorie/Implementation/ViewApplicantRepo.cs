@@ -55,5 +55,10 @@ namespace JobPortal.API.Repositorie.Implementation
 
 
         }
+      
+        
+       
     }
 }
+
+

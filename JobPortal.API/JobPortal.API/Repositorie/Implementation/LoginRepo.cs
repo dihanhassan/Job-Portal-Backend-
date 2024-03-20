@@ -18,7 +18,7 @@ namespace JobPortal.API.Repositorie.Implementation
             UserLoginModel response = null;
 
            
-            string query = "SELECT * FROM UserTable WHERE UserName = @UserName AND UserPassword = @UserPassword";
+            string query = "SELECT * FROM UserTable WHERE (UserName = @UserName OR Email = @UserName) AND UserPassword = @UserPassword";
 
 
             using (var connection = _dbConnection.CreateConnection())

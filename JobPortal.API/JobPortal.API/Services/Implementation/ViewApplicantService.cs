@@ -22,7 +22,7 @@ namespace JobPortal.API.Services.Implementation
             {
                 response.StatusCode = 200;
                 response.StatusMessage = "Get Info Successfully!";
-                response.GetApplicantInfo = applicants;
+                response.Data = applicants;
             }
             else
             {
