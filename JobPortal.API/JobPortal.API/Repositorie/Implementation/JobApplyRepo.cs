@@ -18,8 +18,8 @@ namespace JobPortal.API.Repositorie.Implementation
             int RowEffect = 0;
             using (var connection = _dBConnection.CreateConnection())
             {
-                string query = @"INSERT INTO JOB_APPLY (PostID,RecruiterID,EmployeeID)
-                                 VALUES (@PostID,@RecruiterID,@EmployeeID)"; 
+                string query = @"INSERT INTO JOB_APPLY (JobPostID,RecruiterID,EmployeeID)
+                                 VALUES (@JobPostID,@RecruiterID,@EmployeeID)"; 
                 RowEffect = await connection.ExecuteAsync(query,jobApply);
             }
             return RowEffect;

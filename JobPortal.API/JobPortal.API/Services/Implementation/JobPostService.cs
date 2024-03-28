@@ -122,13 +122,13 @@ namespace JobPortal.API.Services.Implementation
 
         }
 
-        public async Task<ResponseModel> DeletePost(int PostID,string UserID)
+        public async Task<ResponseModel> DeletePost(string JobPostID, string UserID)
         {
             try
             {
                 ResponseModel response = new ResponseModel();
                 
-                if (await _repo.DeletePost(PostID) > 0)
+                if (await _repo.DeletePost(JobPostID) > 0)
                 {
                     CustomLogModel log = new CustomLogModel
                     {

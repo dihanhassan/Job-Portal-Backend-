@@ -13,11 +13,11 @@ namespace JobPortal.API.Services.Implementation
             _view = view;        
         }
 
-        public async Task<ResponseModel> GetApplicantInfo(string UserID, int PostID)
+        public async Task<ResponseModel> GetApplicantInfo(string UserID, string JobPostID)
         {
            ResponseModel response = new ResponseModel();
            
-            List<ApplicantInfoModel> applicants =await _view.GetApplicantInfo(UserID, PostID);
+            List<ApplicantInfoModel> applicants =await _view.GetApplicantInfo(UserID, JobPostID);
             if(applicants.Count>0)
             {
                 response.StatusCode = 200;

@@ -29,9 +29,12 @@ namespace JobPortal.API.Repositorie.Implementation
                     {
                         try
                         {
+
+                            jobPost.JobPostID =  Guid.NewGuid().ToString();
+
                             string query = @"
-                            INSERT INTO JOB_POSTS_HEADER (UserID, Title, Description, Vacancy, Education, Organization, Location,Compensation, EmployeeStatus, Experience, Created, DeadLine, Field,IsDeleted)
-                            VALUES (@UserID, @Title, @Description, @Vacancy, @Education, @Organization, @Location,@Compensation, @EmployeeStatus, @Experience, @Created, @DeadLine, @Field,0)";
+                            INSERT INTO JOB_POSTS_HEADER (UserID,JobPostID, Title, Description, Vacancy, Education, Organization, Location,Compensation, EmployeeStatus, Experience, Created, DeadLine, Field,IsDeleted)
+                            VALUES (@UserID,@JobPostID, @Title, @Description, @Vacancy, @Education, @Organization, @Location,@Compensation, @EmployeeStatus, @Experience, @Created, @DeadLine, @Field,0)";
                             
                             RowsEffect = await connection.ExecuteAsync(query, jobPost, transaction);
 
@@ -40,20 +43,20 @@ namespace JobPortal.API.Repositorie.Implementation
                             {
 
                                 string queryNew = @"
-                                INSERT INTO JOB_POSTS_RESPONSIBILITY (UserID,Responsibilities,IsDeleted,PostID)
-                                VALUES (@UserID,@Responsibilities,0,@PostID)";
+                                INSERT INTO JOB_POSTS_RESPONSIBILITY (UserID,Responsibilities,IsDeleted,JobPostID)
+                                VALUES (@UserID,@Responsibilities,0,@JobPostID)";
 
-                                RowsEffect &= await connection.ExecuteAsync(queryNew, new { UserID = jobPost.UserID, Responsibilities = jobPost.Responsibilities[i].ToString(), PostID = jobPost.postID },  transaction);
+                                RowsEffect &= await connection.ExecuteAsync(queryNew, new { UserID = jobPost.UserID, Responsibilities = jobPost.Responsibilities[i].ToString(), JobPostID = jobPost.JobPostID },  transaction);
                             }
 
                             for (int i = 0; i < jobPost.Requirements.Length; i++)
                             {
 
                                 string queryNew = @"
-                                INSERT INTO JOB_POSTS_REQUIREMENTS (UserID,Requirements,IsDeleted,PostID)
-                                VALUES (@UserID,@Requirements,0,@PostID)";
+                                INSERT INTO JOB_POSTS_REQUIREMENTS (UserID,Requirements,IsDeleted,JobPostID)
+                                VALUES (@UserID,@Requirements,0,@JobPostID)";
 
-                                RowsEffect &= await connection.ExecuteAsync(queryNew, new { UserID = jobPost.UserID, Requirements = jobPost.Requirements[i].ToString(), PostID=jobPost.postID }, transaction);
+                                RowsEffect &= await connection.ExecuteAsync(queryNew, new { UserID = jobPost.UserID, Requirements = jobPost.Requirements[i].ToString(), JobPostID = jobPost.JobPostID }, transaction);
                             }
                             RowsEffect = 1;
                             transaction.Commit();
@@ -105,9 +108,9 @@ namespace JobPortal.API.Repositorie.Implementation
 
                         string queryReq = @"SELECT Requirements 
                                             FROM JOB_POSTS_REQUIREMENTS 
-                                            WHERE  postID = @postID 
+                                            WHERE  JobPostID = @JobPostID 
                                             AND IsDeleted=@IsDeleted";
-                        using (var readr = await connection.ExecuteReaderAsync(queryReq, new { postID = jobPost.postID, IsDeleted = 0 }))
+                        using (var readr = await connection.ExecuteReaderAsync(queryReq, new { JobPostID = jobPost.JobPostID, IsDeleted = 0 }))
                         {
                             List<string> requirement = new List<string>();
                             while (readr.Read())
@@ -119,9 +122,9 @@ namespace JobPortal.API.Repositorie.Implementation
 
                         string queryRes = @"SELECT Responsibilities 
                                             FROM JOB_POSTS_RESPONSIBILITY
-                                            WHERE  postID = @postID
+                                            WHERE  JobPostID = @JobPostID
                                             AND IsDeleted=@IsDeleted";
-                        using (var readr = await connection.ExecuteReaderAsync(queryRes, new { postID = jobPost.postID, IsDeleted=0 }))
+                        using (var readr = await connection.ExecuteReaderAsync(queryRes, new { JobPostID = jobPost.JobPostID, IsDeleted=0 }))
                         {
                             List<string> responsibilities = new List<string>();
                             while (readr.Read())
@@ -170,9 +173,9 @@ namespace JobPortal.API.Repositorie.Implementation
 
                         string queryReq = @"SELECT Requirements 
                                                 FROM JOB_POSTS_REQUIREMENTS 
-                                                WHERE  postID = @postID 
+                                                WHERE  JobPostID = @JobPostID 
                                                 AND IsDeleted=@IsDeleted";
-                        using (var readr = await connection.ExecuteReaderAsync(queryReq, new { postID = jobPost.postID , IsDeleted =0}))
+                        using (var readr = await connection.ExecuteReaderAsync(queryReq, new { JobPostID = jobPost.JobPostID, IsDeleted =0}))
                         {
                             List<string> requirement = new List<string>();
                             while (readr.Read())
@@ -184,9 +187,9 @@ namespace JobPortal.API.Repositorie.Implementation
 
                         string queryRes = @"SELECT Responsibilities 
                                                 FROM JOB_POSTS_RESPONSIBILITY
-                                                WHERE  postID = @postID
+                                                WHERE  JobPostID = @JobPostID
                                                 AND IsDeleted=@IsDeleted";
-                        using (var readr = await connection.ExecuteReaderAsync(queryRes, new { postID = jobPost.postID , IsDeleted = 0 }))
+                        using (var readr = await connection.ExecuteReaderAsync(queryRes, new { JobPostID = jobPost.JobPostID, IsDeleted = 0 }))
                         {
                             List<string> responsibilities = new List<string>();
                             while (readr.Read())
@@ -209,7 +212,7 @@ namespace JobPortal.API.Repositorie.Implementation
         }
 
 
-        public async Task<int> DeletePost(int PostID)
+        public async Task<int> DeletePost(string JobPostID)
         {
             try
             {
@@ -224,22 +227,22 @@ namespace JobPortal.API.Repositorie.Implementation
                         {
                             string query = @"UPDATE JOB_POSTS_HEADER
                                             SET IsDeleted = 1
-                                            WHERE PostID=@PostID";
+                                            WHERE JobPostID=@JobPostID";
                                              
 
-                            isDeleted = await connection.ExecuteAsync(query, new { PostID = PostID }, transaction);
+                            isDeleted = await connection.ExecuteAsync(query, new { JobPostID = JobPostID }, transaction);
 
                             string query2 = @"UPDATE JOB_POSTS_RESPONSIBILITY
                                              SET IsDeleted = 1
-                                             WHERE PostID = @PostID";
+                                             WHERE JobPostID = @JobPostID";
 
-                            isDeleted &= await connection.ExecuteAsync(query2, new { PostID = PostID }, transaction);
+                            isDeleted &= await connection.ExecuteAsync(query2, new { JobPostID = JobPostID }, transaction);
 
                             string query3 = @"UPDATE JOB_POSTS_REQUIREMENTS 
                                              SET IsDeleted = 1
-                                             WHERE PostID = @PostID";
+                                             WHERE JobPostID = @JobPostID";
 
-                            isDeleted &= await connection.ExecuteAsync(query3, new { PostID = PostID }, transaction);
+                            isDeleted &= await connection.ExecuteAsync(query3, new { JobPostID = JobPostID }, transaction);
 
                            
 

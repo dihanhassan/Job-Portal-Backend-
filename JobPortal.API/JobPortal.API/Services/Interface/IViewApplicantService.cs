@@ -5,6 +5,6 @@ namespace JobPortal.API.Services.Interface
 {
     public interface IViewApplicantService
     {
-        public Task<ResponseModel> GetApplicantInfo(string UserID, int PostID);
+        public Task<ResponseModel> GetApplicantInfo(string UserID, string JobPostID);
     }
 }

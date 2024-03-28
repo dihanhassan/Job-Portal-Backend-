@@ -61,23 +61,25 @@ namespace JobPortal.API.Controllers
 
 
         [HttpPost("refresh-token")]
-        public async Task<IActionResult> RefreshTokens( [FromBody]  UserLoginModel user)
+        public async Task<IActionResult> RefreshTokens([FromBody] UserLoginModel user)
         {
-          
+
+            
+
             string refreshToken = user.RefreshToken;
             string UserId = user.UserID;
 
-           
+
             string extractedUserId = await _tokenService.ExtractUserIdFromRefreshToken(refreshToken);
 
-           
+
             if (UserId != extractedUserId)
             {
                 return BadRequest("User ID mismatch");
             }
 
-         
-            var tokenResponse = await _tokenService.GenerateToken( user.UserID);
+
+            var tokenResponse = await _tokenService.GenerateToken(user.UserID);
 
             return Ok(tokenResponse);
         }

@@ -8,7 +8,7 @@ namespace JobPortal.API.Models.Authentication
         public string UserName { get; set; }
         public string ? Email { get; set; }   
        
-        public string UserPassword { get; set; }
+        public string ?UserPassword { get; set; }
         public int ? UserType { get; set; }
 
        public string? RefreshToken { get; set; } = string.Empty;

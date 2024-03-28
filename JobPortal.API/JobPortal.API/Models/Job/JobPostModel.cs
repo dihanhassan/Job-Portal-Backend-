@@ -6,7 +6,9 @@ namespace JobPortal.API.Models.Job
     {
         [Required]
         public string UserID { get; set; } = string.Empty;
-        public int postID { get; set; }
+       
+        public string JobPostID { get; set; } = string.Empty;
+
         [Required]
         public string Title { get; set; } = string.Empty;
         [Required]

@@ -12,7 +12,7 @@ namespace JobPortal.API.Repositorie.Implementation
         {
              _dBconnection = dBConnection;
         }
-        public async Task<List<ApplicantInfoModel>> GetApplicantInfo(string UserID, int PostID)
+        public async Task<List<ApplicantInfoModel>> GetApplicantInfo(string UserID, string JobPostID)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace JobPortal.API.Repositorie.Implementation
                                     ap.[PostID] = @PostID;";
 
 
-                    var UserInfo = await connection.QueryAsync<ApplicantInfoModel>(query, new { PostID = PostID});
+                    var UserInfo = await connection.QueryAsync<ApplicantInfoModel>(query, new { JobPostID = JobPostID});
                     ApplicantInfo = UserInfo.ToList();   
                 }
                 return ApplicantInfo;

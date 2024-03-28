@@ -24,7 +24,7 @@ namespace JobPortal.API.Controllers
 
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("GetCreatedPost")]
         public async Task<IActionResult> GetCreatedPost(string UserID)
@@ -36,19 +36,19 @@ namespace JobPortal.API.Controllers
 
         [HttpPut]
         [Route("DeletePost")]
-        public async Task<IActionResult> DeletePost(int PostID,string UserID)
+        public async Task<IActionResult> DeletePost(string JobPostID, string UserID)
         {
             IActionResult response = Unauthorized();
-            return Ok(await _jobPostService.DeletePost(PostID,UserID));
+            return Ok(await _jobPostService.DeletePost(JobPostID, UserID));
 
         }
         [HttpGet]
         [Route("GetApplicantInfo")]
-        public async Task<IActionResult> GetApplicantInfo(string UserID, int PostID)
+        public async Task<IActionResult> GetApplicantInfo(string UserID, string JobPostID)
         {
             IActionResult response = Unauthorized();
 
-            return Ok(await _viewApplicantService.GetApplicantInfo(UserID, PostID));
+            return Ok(await _viewApplicantService.GetApplicantInfo(UserID, JobPostID));
            
         }
 

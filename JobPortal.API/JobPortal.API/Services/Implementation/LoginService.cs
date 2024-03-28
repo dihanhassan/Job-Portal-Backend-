@@ -48,7 +48,7 @@ namespace JobPortal.API.Services.Implementation
             {
                 response.StatusMessage = $"Login Faield .";
                 response.StatusCode = 100;
-                response.Data = credential;
+               
                 return response;
             }
         }
